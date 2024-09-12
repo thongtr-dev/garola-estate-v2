@@ -1,12 +1,11 @@
 import { FC } from 'react';
-import Link from 'next/link';
+import Hero from '@/components/Hero';
 
 const Home: FC = () => {
   return (
-    <div>
-      <h1 className="text-3xl">Welcome</h1>
-      <Link href="/properties">Go to properties</Link>
-    </div>
+    <>
+      <Hero />
+    </>
   );
 };
 
