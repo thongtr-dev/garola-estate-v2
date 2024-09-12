@@ -8,44 +8,25 @@ import {
   FaMoneyBill,
   FaMapMarker,
 } from 'react-icons/fa';
-
-interface PropertyCardProps {
-  property: {
-    _id: string;
-    name: string;
-    type: string;
-    beds: number;
-    baths: number;
-    square_feet: number;
-    location: {
-      city: string;
-      state: string;
-    };
-    rates: {
-      weekly: number;
-      monthly: number;
-      nightly?: number;
-    };
-    images: [string];
-  };
-}
+import { PropertyCardProps } from '@/interfaces/Property';
 
 const PropertyCard: FC<PropertyCardProps> = ({ property }) => {
   const getRateDisplay = () => {
     const { rates } = property;
-    if (rates.monthly) {
+    if (rates?.monthly) {
       return `$${rates.monthly.toLocaleString()}/mo`;
-    } else if (rates.weekly) {
+    } else if (rates?.weekly) {
       return `$${rates.weekly.toLocaleString()}/wk`;
-    } else if (rates.nightly) {
+    } else if (rates?.nightly) {
       return `$${rates.nightly.toLocaleString()}/night`;
     }
+    return 'Rate not available';
   };
 
   return (
     <div className="relative rounded-xl shadow-md">
       <Image
-        src={`/images/properties/${property.images[0]}`}
+        src={`/images/properties/${property.images?.[0]}`}
         alt=""
         width={0}
         height={0}
@@ -93,7 +74,7 @@ const PropertyCard: FC<PropertyCardProps> = ({ property }) => {
             <FaMapMarker className="mt-1 text-orange-700" />
             <span className="text-orange-700">
               {' '}
-              {property.location.city} {property.location.state}{' '}
+              {property.location?.city} {property.location?.state}{' '}
             </span>
           </div>
           <Link
